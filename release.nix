@@ -24,6 +24,8 @@
                  nativeBuildInputs = [ php ];
                  buildPhase = ''
                      cp -r ${laravel-build}/{.,}* .
+                     cp -a .env.example .env
+                     php artisan key:generate
                  '';
 
                  doCheck = true;
