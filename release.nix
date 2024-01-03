@@ -33,6 +33,7 @@
                  '';
              };
          });
+         tests = laravel-build.tests;
      };
   in
     jobs
