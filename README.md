@@ -1,66 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+للعربية إضغط علي الرابط التالي: [التوثيق](docs/ar/)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Intro
 
-## About Laravel
+This is a NixOS [hydra](https://nixos.wiki/wiki/Hydra) & [Laravel](https://laravel.com/) build example.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Adding this project (or a fork) to hydra
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+To add this project or even a fork of it to your local hydra's instance, follow these steps:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installation
 
-## Learning Laravel
+1. Visit your dashboard usually @ http://localhost:3000/
+2. Click on Admin -> Create project (Assuming you created your admin account & already logged in, if not follow their [installation and setup](https://github.com/NixOS/hydra?tab=readme-ov-file#installation-and-setup) docs)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Adding a project
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<details>
+<summary>Add project steps</summary>
+   
+1. Identifier: Nix-Laravel (or anything you'd like but it has to be unique among your other projects)
+2. Display name: Nix-Laravel
+3. Desciption: 	A Laravel hydra example.
+4. Homepage (This one could be docs page or project's github url): https://github.com/Al-Ghoul/Nix-Laravel
+5. Create project (ignore everything else, declative spec/input are meant to provide all the info in a JSON format, declaratively (I'll refer to that later))
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+</details>
 
-## Laravel Sponsors
+## Adding jobset(s)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+<details>
+<summary>Add initial job</summary>
 
-### Premium Partners
+1. After creating your project, go to hydra's index page, you'll find your project listed there click on the identifier.
+2. Click on actions -> Create jobset.
+3. Identifier: Nix-Laravel-Build (Keeping State: Enabled, Visible: Ticked).
+4. Type: Legacy (I'll provide a flake example later).
+5. Description: Nix-Laravel's build jobset.
+6. Nix expression: release.nix **in** siteSrc.
+7. Check interval: 60 (seconds).
+8. Scheduling shares: 1.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+</details>
 
-## Contributing
+<details>
+<summary>Add dependencies inputs</summary>
+Skip everything and scroll down to inputs section:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Click on Add a new input:
 
-## Code of Conduct
+-   Input name: siteSrc (This input's name gets passed to [release.nix](https://github.com/Al-Ghoul/Nix-Laravel/blob/main/release.nix#L2))
+-   Type: Git checkout
+-   Value: "https://github.com/Al-Ghoul/Nix-Laravel main" (with no quotes) <br>
+    or provide your projects url, wondering why the extra 'main'?, well by default hydra tries to fetch from master branch, so you can override it like that
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+2. Add a second input(You'll need another input for nixpkgs):
 
-## Security Vulnerabilities
+-   Input name: nixpkgs
+-   Type: Git checkout
+-   Value: "https://github.com/nixos/nixpkgs nixos-23.11" (with no quotes) <br>
+    again 'nixos-23.11' overrides or 'specifies' the branch
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+</details>
 
-## License
+# References
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[NixOS Hydra's Manual](https://hydra.nixos.org/build/196107287/download/1/hydra/introduction.html) <br>
+[NixOS Hydra's Official Repo](https://github.com/NixOS/hydra) <br>
+[NixOS Hydra's Wiki](https://nixos.wiki/wiki/Hydra)
