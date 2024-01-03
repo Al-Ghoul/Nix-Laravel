@@ -74,4 +74,8 @@ Declartive spec و inputالــ <br>
 
 [NixOS Hydra's Manual](https://hydra.nixos.org/build/196107287/download/1/hydra/introduction.html) <br>
 [NixOS Hydra's Official Repo](https://github.com/NixOS/hydra) <br>
-[NixOS Hydra's Wiki](https://nixos.wiki/wiki/Hydra)
+[NixOS Hydra's Wiki](https://nixos.wiki/wiki/Hydra) <br>
+[Hydra's Integration tests](https://nixos.org/manual/nix/unstable/contributing/testing.html#integration-tests) <br>
+Package tests <br>
+[Package Tests Manual](https://nixos.org/manual/nixpkgs/unstable/#sec-package-tests) <br>
+[Package Tests README](https://github.com/NixOS/nixpkgs/blob/master/pkgs/README.md#package-tests) <br>
