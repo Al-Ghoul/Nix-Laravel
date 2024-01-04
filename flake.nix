@@ -41,7 +41,7 @@
 
                             doCheck = true;
                             checkPhase = ''
-                                php artisan test
+                                php vendor/bin/phpunit
                                 touch $out
                             '';
                         };
