@@ -21,15 +21,16 @@
              passthru.tests.phpunit-tests = stdenvNoCC.mkDerivation {
                  name ="tests";
                  src = ./.;
+                 buildInputs = [ pkgs.php ];
                  buildPhase = ''
                      cp -r ${laravel-build}/{.,}* .
                      cp -a .env.example .env
-                     artisan key:generate
+                     ./artisan key:generate
                  '';
 
                  doCheck = true;
                  checkPhase = ''
-                     artisan test
+                    ./vendor/bin/phpunit
                      touch $out
                  '';
              };
